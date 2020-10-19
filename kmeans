@@ -1,0 +1,28 @@
+import pandas as pd
+import numpy as np 
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+x1 = np.array([3,3,5,2,4,6,6,6,5,6,7,8,9,8,9,9,8])
+x2 = np.array([5,4,6,6,5,8,2,3,6,7,2,5,1,2,6,1,3])
+plt.plot()
+plt.xlim([0, 10])
+plt.ylim([0, 10])
+plt.title('Dataset')
+plt.scatter(x1, x2)
+plt.show()# create new plot and data
+plt.plot()
+X = np.array(list(zip(x1, x2))).reshape(len(x1), 2)
+colors = ['b', 'g', 'r','y']
+markers = ['o', 'v', 's','+']
+for k in range(2,5):
+  kmeans_model = KMeans(n_clusters=k).fit(X)
+  print("\nK=",k)
+  print(kmeans_model.cluster_centers_)
+  print(kmeans_model.labels_)
+  plt.plot()
+  for i, l in enumerate(kmeans_model.labels_):
+        plt.plot(x1[i], x2[i], color=colors[l], marker=markers[l],ls='None')
+        plt.title('K='+ str(k))
+        plt.xlim([0, 10])
+        plt.ylim([0, 10])
+  plt.show()
